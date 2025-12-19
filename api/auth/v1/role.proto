@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package auth.v1;
+
+import "google/protobuf/empty.proto";
+import "auth/v1/basic.proto";
+
+option go_package = "heytom-auth/api/auth/v1;v1";
+option java_multiple_files = true;
+option java_package = "dev.kratos.api.auth.v1";
+option java_outer_classname = "AuthProtoV1";
+
+// 角色服务
+service Role {
+  rpc PageList(PageRoleRequest) returns (PageRoleResponse);
+  rpc Get(GetRoleRequest) returns (RoleInfo);
+  rpc Create(CreateRoleRequest) returns (RoleInfo);
+  rpc Update(UpdateRoleRequest) returns (google.protobuf.Empty);
+  rpc Delete(DeleteRoleRequest) returns (google.protobuf.Empty);
+}
+
+message PageRoleRequest {
+  PageRequest page = 1;
+}
+
+message PageRoleResponse {
+  int64 total = 1;
+  repeated RoleInfo roles = 2;
+}
+
+// 角色相关消息
+message RoleInfo {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+  int64 permission_space_id = 4;
+  int64 created_at = 5;
+  int64 updated_at = 6;
+}
+
+message CreateRoleRequest {
+  string code = 1;
+  string name = 2;
+  int64 permission_space_id = 3;
+}
+
+message UpdateRoleRequest {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+  int64 permission_space_id = 4;
+}
+
+message DeleteRoleRequest {
+  int64 id = 1;
+}
+
+message GetRoleRequest {
+  int64 id = 1;
+}
+
+
+
+

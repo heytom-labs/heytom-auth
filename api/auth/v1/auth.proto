@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package auth.v1;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "heytom-auth/api/auth/v1;v1";
+option java_multiple_files = true;
+option java_package = "dev.kratos.api.auth.v1";
+option java_outer_classname = "AuthProtoV1";
+
+
+// 认证服务
+service Auth {
+  rpc Register(RegisterRequest) returns (TokenResponse);
+  rpc Login(LoginRequest) returns (TokenResponse);
+  rpc Logout(google.protobuf.Empty) returns (google.protobuf.Empty);
+  rpc LoginByGithub(LoginByGithubRequest) returns (TokenResponse);
+}
+
+message RegisterRequest {
+  string name = 1;
+  string mobile = 2;
+  string password = 3;
+}
+
+message LoginRequest {
+  string mobile = 1;
+  string password = 2;
+}
+
+message LoginByGithubRequest {
+  string code = 1;
+}
+
+message TokenResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  int64 expires_in = 3;
+}
+
+
+
+
