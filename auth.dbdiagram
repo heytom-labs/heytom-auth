@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "darkMode": false,
+  "gridEnabling": false,
+  "detailLevel": "All",
+  "tablePositions": [
+    {
+      "name": "user",
+      "schemaName": "public",
+      "x": 12,
+      "y": 12
+    },
+    {
+      "name": "role",
+      "schemaName": "public",
+      "x": 12,
+      "y": 346
+    },
+    {
+      "name": "user_role",
+      "schemaName": "public",
+      "x": 549.57373046875,
+      "y": 12
+    },
+    {
+      "name": "resource",
+      "schemaName": "public",
+      "x": 12,
+      "y": 616
+    },
+    {
+      "name": "action",
+      "schemaName": "public",
+      "x": 12,
+      "y": 822
+    },
+    {
+      "name": "policy",
+      "schemaName": "public",
+      "x": 589.3318750000001,
+      "y": 587.8600000000002
+    },
+    {
+      "name": "role_data_scope",
+      "schemaName": "public",
+      "x": 556.6087304687501,
+      "y": 312.63000000000005
+    }
+  ],
+  "tableGroupCollapseStates": [],
+  "stickyNoteLayouts": [],
+  "referencePaths": []
+}
