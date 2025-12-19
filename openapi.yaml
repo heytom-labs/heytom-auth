@@ -185,99 +185,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/helloworld.v1.HelloReply'
-    /organization:
-        post:
-            tags:
-                - Organization
-            operationId: Organization_Create
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/auth.v1.CreateOrganizationRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/auth.v1.OrganizationInfo'
-    /organization/list:
-        get:
-            tags:
-                - Organization
-            operationId: Organization_PageList
-            parameters:
-                - name: page.pageIndex
-                  in: query
-                  schema:
-                    type: integer
-                    format: int32
-                - name: page.pageSize
-                  in: query
-                  schema:
-                    type: integer
-                    format: int32
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/auth.v1.PageOrganizationResponse'
-    /organization/{id}:
-        get:
-            tags:
-                - Organization
-            operationId: Organization_Get
-            parameters:
-                - name: id
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/auth.v1.OrganizationInfo'
-        put:
-            tags:
-                - Organization
-            operationId: Organization_Update
-            parameters:
-                - name: id
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/auth.v1.UpdateOrganizationRequest'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content: {}
-        delete:
-            tags:
-                - Organization
-            operationId: Organization_Delete
-            parameters:
-                - name: id
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content: {}
     /policy:
         post:
             tags:
@@ -588,17 +495,6 @@ components:
                     type: string
                 callbackUrl:
                     type: string
-        auth.v1.CreateOrganizationRequest:
-            type: object
-            properties:
-                name:
-                    type: string
-                code:
-                    type: string
-                parentId:
-                    type: string
-                description:
-                    type: string
         auth.v1.CreatePolicyRequest:
             type: object
             properties:
@@ -626,8 +522,6 @@ components:
                     type: array
                     items:
                         type: string
-                organizationId:
-                    type: string
         auth.v1.LoginByGithubRequest:
             type: object
             properties:
@@ -640,24 +534,6 @@ components:
                     type: string
                 password:
                     type: string
-        auth.v1.OrganizationInfo:
-            type: object
-            properties:
-                id:
-                    type: string
-                name:
-                    type: string
-                code:
-                    type: string
-                parentId:
-                    type: string
-                description:
-                    type: string
-                createdAt:
-                    type: string
-                updatedAt:
-                    type: string
-            description: 组织相关消息
         auth.v1.PageApplicationResponse:
             type: object
             properties:
@@ -667,15 +543,6 @@ components:
                     type: array
                     items:
                         $ref: '#/components/schemas/auth.v1.ApplicationInfo'
-        auth.v1.PageOrganizationResponse:
-            type: object
-            properties:
-                total:
-                    type: string
-                organizations:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/auth.v1.OrganizationInfo'
         auth.v1.PagePolicyResponse:
             type: object
             properties:
@@ -762,19 +629,6 @@ components:
                     type: string
                 callbackUrl:
                     type: string
-        auth.v1.UpdateOrganizationRequest:
-            type: object
-            properties:
-                id:
-                    type: string
-                name:
-                    type: string
-                code:
-                    type: string
-                parentId:
-                    type: string
-                description:
-                    type: string
         auth.v1.UpdatePolicyRequest:
             type: object
             properties:
@@ -808,8 +662,6 @@ components:
                     type: array
                     items:
                         type: string
-                organizationId:
-                    type: string
         auth.v1.UserInfo:
             type: object
             properties:
@@ -823,8 +675,6 @@ components:
                     type: array
                     items:
                         type: string
-                organizationId:
-                    type: string
                 createdAt:
                     type: string
                 updatedAt:
@@ -843,8 +693,6 @@ tags:
       description: 认证服务
     - name: Greeter
       description: The greeting service definition.
-    - name: Organization
-      description: 组织服务
     - name: Policy
       description: 策略服务
     - name: Role

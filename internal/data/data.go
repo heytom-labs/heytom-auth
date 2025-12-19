@@ -11,7 +11,13 @@ import (
 )
 
 // ProviderSet is data providers.
-var ProviderSet = wire.NewSet(NewData, NewGreeterRepo, NewUserRepo, NewRoleRepo, NewPolicyRepo, NewApplicationRepo, NewOrganizationRepo, NewAuthRepo)
+var ProviderSet = wire.NewSet(NewData,
+	NewGreeterRepo,
+	NewUserRepo,
+	NewRoleRepo,
+	NewPolicyRepo,
+	NewApplicationRepo,
+	NewAuthRepo)
 
 // Data .
 type Data struct {
@@ -27,7 +33,15 @@ func NewData(c *conf.Data) (*Data, func(), error) {
 	}
 
 	// 自动迁移数据模型
-	err = db.AutoMigrate(&User{}, &Role{}, &Policy{}, &Application{}, &Organization{}, &biz.User{}, &biz.Token{})
+	err = db.AutoMigrate(
+		&User{},
+		&Role{},
+		&Policy{},
+		&Application{},
+		&biz.User{},
+		&biz.Token{},
+	)
+
 	if err != nil {
 		return nil, nil, err
 	}

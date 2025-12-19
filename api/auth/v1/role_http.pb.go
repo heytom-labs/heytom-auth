@@ -36,14 +36,14 @@ type RoleHTTPServer interface {
 
 func RegisterRoleHTTPServer(s *http.Server, srv RoleHTTPServer) {
 	r := s.Route("/")
-	r.GET("/role/list", _Role_PageList3_HTTP_Handler(srv))
-	r.GET("/role/{id}", _Role_Get3_HTTP_Handler(srv))
-	r.POST("/role", _Role_Create3_HTTP_Handler(srv))
-	r.PUT("/role/{id}", _Role_Update3_HTTP_Handler(srv))
-	r.DELETE("/role/{id}", _Role_Delete3_HTTP_Handler(srv))
+	r.GET("/role/list", _Role_PageList2_HTTP_Handler(srv))
+	r.GET("/role/{id}", _Role_Get2_HTTP_Handler(srv))
+	r.POST("/role", _Role_Create2_HTTP_Handler(srv))
+	r.PUT("/role/{id}", _Role_Update2_HTTP_Handler(srv))
+	r.DELETE("/role/{id}", _Role_Delete2_HTTP_Handler(srv))
 }
 
-func _Role_PageList3_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error {
+func _Role_PageList2_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in PageRoleRequest
 		if err := ctx.BindQuery(&in); err != nil {
@@ -62,7 +62,7 @@ func _Role_PageList3_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) err
 	}
 }
 
-func _Role_Get3_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error {
+func _Role_Get2_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetRoleRequest
 		if err := ctx.BindQuery(&in); err != nil {
@@ -84,7 +84,7 @@ func _Role_Get3_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error {
 	}
 }
 
-func _Role_Create3_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error {
+func _Role_Create2_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CreateRoleRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -106,7 +106,7 @@ func _Role_Create3_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error
 	}
 }
 
-func _Role_Update3_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error {
+func _Role_Update2_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateRoleRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -131,7 +131,7 @@ func _Role_Update3_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error
 	}
 }
 
-func _Role_Delete3_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error {
+func _Role_Delete2_HTTP_Handler(srv RoleHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DeleteRoleRequest
 		if err := ctx.BindQuery(&in); err != nil {

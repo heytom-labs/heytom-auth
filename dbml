@@ -1,0 +1,89 @@
+Table "user" {
+  "id" bigint [pk, not null, note: '用户ID']
+  "name" varchar(64) [not null, note: '用户名']
+  "mobile" varchar(64)
+  "password" varchar(64)
+  "avatar" varchar(64)
+  "status" int [not null, note: '状态(1启用 0禁用)']
+  "create_time" datetime [not null]
+  "update_time" datetime [not null]
+  Note: '用户表'
+}
+
+Table "role" {
+  "id" bigint [pk, not null]
+  "code" varchar(64) [not null, note: '角色编码']
+  "name" varchar(64) [not null, note: '角色名称']
+  "status" int [not null]
+  "create_time" datetime [not null]
+  "update_time" datetime [not null]
+  Note: '角色表'
+}
+
+Table "user_role" {
+  "id" bigint [pk, not null]
+  "user_id" bigint [not null]
+  "role_id" bigint [not null]
+  Note: '用户-角色关系表'
+}
+
+Table "resource" {
+  "id" bigint [pk, not null]
+  "code" varchar(64) [not null, note: '资源编码(order、invoice)']
+  "type" int [not null, note: '资源类型(1页面 2接口 3业务对象)']
+  "name" varchar(64) [not null]
+  Note: '资源表'
+}
+
+Table "action" {
+  "id" bigint [pk, not null]
+  "code" varchar(32) [not null, note: '行为(read/write/approve)']
+  "name" varchar(64) [not null]
+  Note: '行为表'
+}
+
+Table "policy" {
+  "id" bigint [pk, not null]
+  "role_id" bigint [not null]
+  "resource_id" bigint [not null]
+  "action_id" bigint [not null]
+  "effect" int [not null, note: '1允许 0拒绝']
+  Note: '权限策略表'
+}
+
+Table "role_data_scope" {
+  "id" bigint [pk, not null]
+  "role_id" bigint [not null]
+  "resource_code" varchar(64) [not null, note: '业务资源编码，如 order']
+  "scope_type" varchar(32) [not null, note: 'ALL / SELF / ORG / CUSTOM']
+  Note: '角色数据权限范围表'
+}
+
+
+ref {
+  policy.role_id > role.id
+}
+
+ref {
+    policy.resource_id > resource.id
+}
+
+ref {
+   policy.action_id > action.id
+}
+
+ref {
+  user_role.user_id > user.id
+}
+
+ref {
+    user_role.role_id > role.id
+}
+
+ref {
+  role_data_scope.role_id > role.id
+}
+
+
+
+

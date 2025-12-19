@@ -36,14 +36,14 @@ type UserHTTPServer interface {
 
 func RegisterUserHTTPServer(s *http.Server, srv UserHTTPServer) {
 	r := s.Route("/")
-	r.GET("/user/list", _User_PageList4_HTTP_Handler(srv))
-	r.GET("/user/{id}", _User_Get4_HTTP_Handler(srv))
-	r.POST("/user", _User_Create4_HTTP_Handler(srv))
-	r.PUT("/user/{id}", _User_Update4_HTTP_Handler(srv))
-	r.DELETE("/user/{id}", _User_Delete4_HTTP_Handler(srv))
+	r.GET("/user/list", _User_PageList3_HTTP_Handler(srv))
+	r.GET("/user/{id}", _User_Get3_HTTP_Handler(srv))
+	r.POST("/user", _User_Create3_HTTP_Handler(srv))
+	r.PUT("/user/{id}", _User_Update3_HTTP_Handler(srv))
+	r.DELETE("/user/{id}", _User_Delete3_HTTP_Handler(srv))
 }
 
-func _User_PageList4_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_PageList3_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in PageUserRequest
 		if err := ctx.BindQuery(&in); err != nil {
@@ -62,7 +62,7 @@ func _User_PageList4_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) err
 	}
 }
 
-func _User_Get4_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_Get3_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetUserRequest
 		if err := ctx.BindQuery(&in); err != nil {
@@ -84,7 +84,7 @@ func _User_Get4_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	}
 }
 
-func _User_Create4_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_Create3_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CreateUserRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -106,7 +106,7 @@ func _User_Create4_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error
 	}
 }
 
-func _User_Update4_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_Update3_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdateUserRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -131,7 +131,7 @@ func _User_Update4_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error
 	}
 }
 
-func _User_Delete4_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
+func _User_Delete3_HTTP_Handler(srv UserHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DeleteUserRequest
 		if err := ctx.BindQuery(&in); err != nil {

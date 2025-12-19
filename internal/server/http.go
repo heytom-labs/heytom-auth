@@ -12,7 +12,16 @@ import (
 )
 
 // NewHTTPServer new an HTTP server.
-func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, user *service.UserService, role *service.RoleService, policy *service.PolicyService, application *service.ApplicationService, organization *service.OrganizationService, auth *service.AuthService, logger log.Logger) *http.Server {
+func NewHTTPServer(
+	c *conf.Server,
+	greeter *service.GreeterService,
+	user *service.UserService,
+	role *service.RoleService,
+	policy *service.PolicyService,
+	application *service.ApplicationService,
+	auth *service.AuthService,
+	logger log.Logger,
+) *http.Server {
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
@@ -33,7 +42,6 @@ func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, user *servic
 	authv1.RegisterRoleHTTPServer(srv, role)
 	authv1.RegisterPolicyHTTPServer(srv, policy)
 	authv1.RegisterApplicationHTTPServer(srv, application)
-	authv1.RegisterOrganizationHTTPServer(srv, organization)
 	authv1.RegisterAuthHTTPServer(srv, auth)
 	return srv
 }

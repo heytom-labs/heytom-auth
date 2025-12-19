@@ -36,14 +36,14 @@ type PolicyHTTPServer interface {
 
 func RegisterPolicyHTTPServer(s *http.Server, srv PolicyHTTPServer) {
 	r := s.Route("/")
-	r.GET("/policy/list", _Policy_PageList2_HTTP_Handler(srv))
-	r.GET("/policy/{id}", _Policy_Get2_HTTP_Handler(srv))
-	r.POST("/policy", _Policy_Create2_HTTP_Handler(srv))
-	r.PUT("/policy/{id}", _Policy_Update2_HTTP_Handler(srv))
-	r.DELETE("/policy/{id}", _Policy_Delete2_HTTP_Handler(srv))
+	r.GET("/policy/list", _Policy_PageList1_HTTP_Handler(srv))
+	r.GET("/policy/{id}", _Policy_Get1_HTTP_Handler(srv))
+	r.POST("/policy", _Policy_Create1_HTTP_Handler(srv))
+	r.PUT("/policy/{id}", _Policy_Update1_HTTP_Handler(srv))
+	r.DELETE("/policy/{id}", _Policy_Delete1_HTTP_Handler(srv))
 }
 
-func _Policy_PageList2_HTTP_Handler(srv PolicyHTTPServer) func(ctx http.Context) error {
+func _Policy_PageList1_HTTP_Handler(srv PolicyHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in PagePolicyRequest
 		if err := ctx.BindQuery(&in); err != nil {
@@ -62,7 +62,7 @@ func _Policy_PageList2_HTTP_Handler(srv PolicyHTTPServer) func(ctx http.Context)
 	}
 }
 
-func _Policy_Get2_HTTP_Handler(srv PolicyHTTPServer) func(ctx http.Context) error {
+func _Policy_Get1_HTTP_Handler(srv PolicyHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in GetPolicyRequest
 		if err := ctx.BindQuery(&in); err != nil {
@@ -84,7 +84,7 @@ func _Policy_Get2_HTTP_Handler(srv PolicyHTTPServer) func(ctx http.Context) erro
 	}
 }
 
-func _Policy_Create2_HTTP_Handler(srv PolicyHTTPServer) func(ctx http.Context) error {
+func _Policy_Create1_HTTP_Handler(srv PolicyHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in CreatePolicyRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -106,7 +106,7 @@ func _Policy_Create2_HTTP_Handler(srv PolicyHTTPServer) func(ctx http.Context) e
 	}
 }
 
-func _Policy_Update2_HTTP_Handler(srv PolicyHTTPServer) func(ctx http.Context) error {
+func _Policy_Update1_HTTP_Handler(srv PolicyHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in UpdatePolicyRequest
 		if err := ctx.Bind(&in); err != nil {
@@ -131,7 +131,7 @@ func _Policy_Update2_HTTP_Handler(srv PolicyHTTPServer) func(ctx http.Context) e
 	}
 }
 
-func _Policy_Delete2_HTTP_Handler(srv PolicyHTTPServer) func(ctx http.Context) error {
+func _Policy_Delete1_HTTP_Handler(srv PolicyHTTPServer) func(ctx http.Context) error {
 	return func(ctx http.Context) error {
 		var in DeletePolicyRequest
 		if err := ctx.BindQuery(&in); err != nil {
