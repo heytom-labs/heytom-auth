@@ -33,17 +33,17 @@ func NewUserUsecase(repo UserRepo) *UserUsecase {
 }
 
 func (s *UserUsecase) PageList(ctx context.Context, pageIndex int64, pageSize int64) (int64, []*User, error) {
-	return 0, nil, nil
+	return s.repo.PageList(ctx, pageIndex, pageSize)
 }
 func (s *UserUsecase) Get(ctx context.Context, id int64) (*User, error) {
-	return &User{}, nil
+	return s.repo.Get(ctx, id)
 }
 func (s *UserUsecase) Create(ctx context.Context, req *User) (*User, error) {
-	return &User{}, nil
+	return s.repo.Create(ctx, req)
 }
 func (s *UserUsecase) Update(ctx context.Context, req *User) error {
-	return nil
+	return s.repo.Update(ctx, req)
 }
 func (s *UserUsecase) Delete(ctx context.Context, id int64) error {
-	return nil
+	return s.repo.Delete(ctx, id)
 }

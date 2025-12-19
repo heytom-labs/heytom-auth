@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -120,15 +121,14 @@ func (x *PageRoleResponse) GetRoles() []*RoleInfo {
 
 // 角色相关消息
 type RoleInfo struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Id                int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Code              string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	Name              string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	PermissionSpaceId int64                  `protobuf:"varint,4,opt,name=permission_space_id,json=permissionSpaceId,proto3" json:"permission_space_id,omitempty"`
-	CreatedAt         int64                  `protobuf:"varint,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt         int64                  `protobuf:"varint,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	CreatedAt     int64                  `protobuf:"varint,4,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     int64                  `protobuf:"varint,5,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *RoleInfo) Reset() {
@@ -182,13 +182,6 @@ func (x *RoleInfo) GetName() string {
 	return ""
 }
 
-func (x *RoleInfo) GetPermissionSpaceId() int64 {
-	if x != nil {
-		return x.PermissionSpaceId
-	}
-	return 0
-}
-
 func (x *RoleInfo) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
@@ -204,12 +197,11 @@ func (x *RoleInfo) GetUpdatedAt() int64 {
 }
 
 type CreateRoleRequest struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Code              string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
-	Name              string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	PermissionSpaceId int64                  `protobuf:"varint,3,opt,name=permission_space_id,json=permissionSpaceId,proto3" json:"permission_space_id,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateRoleRequest) Reset() {
@@ -256,21 +248,13 @@ func (x *CreateRoleRequest) GetName() string {
 	return ""
 }
 
-func (x *CreateRoleRequest) GetPermissionSpaceId() int64 {
-	if x != nil {
-		return x.PermissionSpaceId
-	}
-	return 0
-}
-
 type UpdateRoleRequest struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Id                int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Code              string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	Name              string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	PermissionSpaceId int64                  `protobuf:"varint,4,opt,name=permission_space_id,json=permissionSpaceId,proto3" json:"permission_space_id,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateRoleRequest) Reset() {
@@ -322,13 +306,6 @@ func (x *UpdateRoleRequest) GetName() string {
 		return x.Name
 	}
 	return ""
-}
-
-func (x *UpdateRoleRequest) GetPermissionSpaceId() int64 {
-	if x != nil {
-		return x.PermissionSpaceId
-	}
-	return 0
 }
 
 type DeleteRoleRequest struct {
@@ -423,40 +400,42 @@ var File_auth_v1_role_proto protoreflect.FileDescriptor
 
 const file_auth_v1_role_proto_rawDesc = "" +
 	"\n" +
-	"\x12auth/v1/role.proto\x12\aauth.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x13auth/v1/basic.proto\";\n" +
+	"\x12auth/v1/role.proto\x12\aauth.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x13auth/v1/basic.proto\";\n" +
 	"\x0fPageRoleRequest\x12(\n" +
 	"\x04page\x18\x01 \x01(\v2\x14.auth.v1.PageRequestR\x04page\"Q\n" +
 	"\x10PageRoleResponse\x12\x14\n" +
 	"\x05total\x18\x01 \x01(\x03R\x05total\x12'\n" +
-	"\x05roles\x18\x02 \x03(\v2\x11.auth.v1.RoleInfoR\x05roles\"\xb0\x01\n" +
+	"\x05roles\x18\x02 \x03(\v2\x11.auth.v1.RoleInfoR\x05roles\"\x80\x01\n" +
 	"\bRoleInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12.\n" +
-	"\x13permission_space_id\x18\x04 \x01(\x03R\x11permissionSpaceId\x12\x1d\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\x04 \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\x03R\tupdatedAt\"k\n" +
+	"updated_at\x18\x05 \x01(\x03R\tupdatedAt\";\n" +
 	"\x11CreateRoleRequest\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12.\n" +
-	"\x13permission_space_id\x18\x03 \x01(\x03R\x11permissionSpaceId\"{\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"K\n" +
 	"\x11UpdateRoleRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x12\n" +
-	"\x04name\x18\x03 \x01(\tR\x04name\x12.\n" +
-	"\x13permission_space_id\x18\x04 \x01(\x03R\x11permissionSpaceId\"#\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\"#\n" +
 	"\x11DeleteRoleRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\" \n" +
 	"\x0eGetRoleRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id2\xaf\x02\n" +
-	"\x04Role\x12?\n" +
-	"\bPageList\x12\x18.auth.v1.PageRoleRequest\x1a\x19.auth.v1.PageRoleResponse\x121\n" +
-	"\x03Get\x12\x17.auth.v1.GetRoleRequest\x1a\x11.auth.v1.RoleInfo\x127\n" +
-	"\x06Create\x12\x1a.auth.v1.CreateRoleRequest\x1a\x11.auth.v1.RoleInfo\x12<\n" +
-	"\x06Update\x12\x1a.auth.v1.UpdateRoleRequest\x1a\x16.google.protobuf.Empty\x12<\n" +
-	"\x06Delete\x12\x1a.auth.v1.DeleteRoleRequest\x1a\x16.google.protobuf.EmptyBC\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id2\x94\x03\n" +
+	"\x04Role\x12S\n" +
+	"\bPageList\x12\x18.auth.v1.PageRoleRequest\x1a\x19.auth.v1.PageRoleResponse\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
+	"/role/list\x12E\n" +
+	"\x03Get\x12\x17.auth.v1.GetRoleRequest\x1a\x11.auth.v1.RoleInfo\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
+	"/role/{id}\x12I\n" +
+	"\x06Create\x12\x1a.auth.v1.CreateRoleRequest\x1a\x11.auth.v1.RoleInfo\"\x10\x82\xd3\xe4\x93\x02\n" +
+	":\x01*\"\x05/role\x12S\n" +
+	"\x06Update\x12\x1a.auth.v1.UpdateRoleRequest\x1a\x16.google.protobuf.Empty\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\x1a\n" +
+	"/role/{id}\x12P\n" +
+	"\x06Delete\x12\x1a.auth.v1.DeleteRoleRequest\x1a\x16.google.protobuf.Empty\"\x12\x82\xd3\xe4\x93\x02\f*\n" +
+	"/role/{id}BC\n" +
 	"\x16dev.kratos.api.auth.v1B\vAuthProtoV1P\x01Z\x1aheytom-auth/api/auth/v1;v1b\x06proto3"
 
 var (

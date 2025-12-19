@@ -1,5 +1,9 @@
 package biz
 
+import (
+	"context"
+)
+
 type Policy struct {
 	ID
 	Name        string `json:"name" gorm:"size:20;not null;comment:名称"`
@@ -15,20 +19,38 @@ type PolicyAuth struct {
 	TargetId   int64 `json:"target_id"`
 }
 
-type PolicyResource struct {
-	ID
-	PolicyId          int64 `json:"policy_id"`
-	PermissionSpaceId int64 `json:"permission_space_id"`
-	ResourceId        int64 `json:"resource_id"`
-	Effect            int8  `json:"effect" gorm:"comment:效果0/1"`
-	Timestamps
-	SoftDeletes
+type PolicyRepo interface {
+	PageList(ctx context.Context, pageIndex int64, pageSize int64) (int64, []*Policy, error)
+	Get(ctx context.Context, id int64) (*Policy, error)
+	Create(ctx context.Context, req *Policy) (*Policy, error)
+	Update(ctx context.Context, req *Policy) error
+	Delete(ctx context.Context, id int64) error
 }
 
-type PolicyResourceItem struct {
-	ID
-	PolicyId            int64  `json:"policy_id"`
-	PolicyResourceId    int64  `json:"policy_resouce_id"`
-	ResourceItemId      int64  `json:"resource_item_id"`
-	ResourceItemActions string `json:"resource_item_actions" gorm:"size:255;not null"`
+type PolicyUsecase struct {
+	repo PolicyRepo
+}
+
+func NewPolicyUsecase(repo PolicyRepo) *PolicyUsecase {
+	return &PolicyUsecase{repo: repo}
+}
+
+func (s *PolicyUsecase) PageList(ctx context.Context, pageIndex int64, pageSize int64) (int64, []*Policy, error) {
+	return s.repo.PageList(ctx, pageIndex, pageSize)
+}
+
+func (s *PolicyUsecase) Get(ctx context.Context, id int64) (*Policy, error) {
+	return s.repo.Get(ctx, id)
+}
+
+func (s *PolicyUsecase) Create(ctx context.Context, req *Policy) (*Policy, error) {
+	return s.repo.Create(ctx, req)
+}
+
+func (s *PolicyUsecase) Update(ctx context.Context, req *Policy) error {
+	return s.repo.Update(ctx, req)
+}
+
+func (s *PolicyUsecase) Delete(ctx context.Context, id int64) error {
+	return s.repo.Delete(ctx, id)
 }

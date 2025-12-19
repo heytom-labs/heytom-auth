@@ -1,6 +1,7 @@
 package server
 
 import (
+	authv1 "heytom-auth/api/auth/v1"
 	v1 "heytom-auth/api/helloworld/v1"
 	"heytom-auth/internal/conf"
 	"heytom-auth/internal/service"
@@ -11,7 +12,7 @@ import (
 )
 
 // NewGRPCServer new a gRPC server.
-func NewGRPCServer(c *conf.Server, greeter *service.GreeterService, logger log.Logger) *grpc.Server {
+func NewGRPCServer(c *conf.Server, greeter *service.GreeterService, user *service.UserService, role *service.RoleService, policy *service.PolicyService, application *service.ApplicationService, organization *service.OrganizationService, logger log.Logger) *grpc.Server {
 	var opts = []grpc.ServerOption{
 		grpc.Middleware(
 			recovery.Recovery(),
@@ -28,5 +29,10 @@ func NewGRPCServer(c *conf.Server, greeter *service.GreeterService, logger log.L
 	}
 	srv := grpc.NewServer(opts...)
 	v1.RegisterGreeterServer(srv, greeter)
+	authv1.RegisterUserServer(srv, user)
+	authv1.RegisterRoleServer(srv, role)
+	authv1.RegisterPolicyServer(srv, policy)
+	authv1.RegisterApplicationServer(srv, application)
+	authv1.RegisterOrganizationServer(srv, organization)
 	return srv
 }

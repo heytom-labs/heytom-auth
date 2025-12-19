@@ -3,6 +3,7 @@ syntax = "proto3";
 package auth.v1;
 
 import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
 
 option go_package = "heytom-auth/api/auth/v1;v1";
 option java_multiple_files = true;
@@ -12,10 +13,30 @@ option java_outer_classname = "AuthProtoV1";
 
 // 认证服务
 service Auth {
-  rpc Register(RegisterRequest) returns (TokenResponse);
-  rpc Login(LoginRequest) returns (TokenResponse);
-  rpc Logout(google.protobuf.Empty) returns (google.protobuf.Empty);
-  rpc LoginByGithub(LoginByGithubRequest) returns (TokenResponse);
+  rpc Register(RegisterRequest) returns (TokenResponse) {
+    option (google.api.http) = {
+      post: "/auth/register"
+      body: "*"
+    };
+  }
+  rpc Login(LoginRequest) returns (TokenResponse) {
+    option (google.api.http) = {
+      post: "/auth/login"
+      body: "*"
+    };
+  }
+  rpc Logout(google.protobuf.Empty) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/auth/logout"
+      body: "*"
+    };
+  }
+  rpc LoginByGithub(LoginByGithubRequest) returns (TokenResponse) {
+    option (google.api.http) = {
+      post: "/auth/github"
+      body: "*"
+    };
+  }
 }
 
 message RegisterRequest {
@@ -38,7 +59,5 @@ message TokenResponse {
   string refresh_token = 2;
   int64 expires_in = 3;
 }
-
-
 
 

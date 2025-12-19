@@ -3,6 +3,7 @@ syntax = "proto3";
 package auth.v1;
 
 import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
 import "auth/v1/basic.proto";
 
 option go_package = "heytom-auth/api/auth/v1;v1";
@@ -13,11 +14,33 @@ option java_outer_classname = "AuthProtoV1";
 
 // 策略服务
 service Policy {
-  rpc PageList(PagePolicyRequest) returns (PagePolicyResponse);
-  rpc Get(GetPolicyRequest) returns (PolicyInfo);
-  rpc Create(CreatePolicyRequest) returns (PolicyInfo);
-  rpc Update(UpdatePolicyRequest) returns (google.protobuf.Empty);
-  rpc Delete(DeletePolicyRequest) returns (google.protobuf.Empty);
+  rpc PageList(PagePolicyRequest) returns (PagePolicyResponse) {
+    option (google.api.http) = {
+      get: "/policy/list"
+    };
+  }
+  rpc Get(GetPolicyRequest) returns (PolicyInfo) {
+    option (google.api.http) = {
+      get: "/policy/{id}"
+    };
+  }
+  rpc Create(CreatePolicyRequest) returns (PolicyInfo) {
+    option (google.api.http) = {
+      post: "/policy"
+      body: "*"
+    };
+  }
+  rpc Update(UpdatePolicyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/policy/{id}"
+      body: "*"
+    };
+  }
+  rpc Delete(DeletePolicyRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/policy/{id}"
+    };
+  }
 }
 
 // 策略相关消息
@@ -25,7 +48,6 @@ message PolicyInfo {
   int64 id = 1;
   string name = 2;
   string code = 3;
-  int64 permission_space_id = 4;
   string description = 5;
   int64 created_at = 6;
   int64 updated_at = 7;
@@ -38,7 +60,6 @@ message DeletePolicyRequest {
 message CreatePolicyRequest {
   string name = 1;
   string code = 2;
-  int64 permission_space_id = 3;
   string description = 4;
 }
 
@@ -46,7 +67,6 @@ message UpdatePolicyRequest {
   int64 id = 1;
   string name = 2;
   string code = 3;
-  int64 permission_space_id = 4;
   string description = 5;
 }
 

@@ -3,6 +3,7 @@ syntax = "proto3";
 package auth.v1;
 
 import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
 import "auth/v1/basic.proto";
 
 option go_package = "heytom-auth/api/auth/v1;v1";
@@ -12,11 +13,33 @@ option java_outer_classname = "AuthProtoV1";
 
 // 角色服务
 service Role {
-  rpc PageList(PageRoleRequest) returns (PageRoleResponse);
-  rpc Get(GetRoleRequest) returns (RoleInfo);
-  rpc Create(CreateRoleRequest) returns (RoleInfo);
-  rpc Update(UpdateRoleRequest) returns (google.protobuf.Empty);
-  rpc Delete(DeleteRoleRequest) returns (google.protobuf.Empty);
+  rpc PageList(PageRoleRequest) returns (PageRoleResponse) {
+    option (google.api.http) = {
+      get: "/role/list"
+    };
+  }
+  rpc Get(GetRoleRequest) returns (RoleInfo) {
+    option (google.api.http) = {
+      get: "/role/{id}"
+    };
+  }
+  rpc Create(CreateRoleRequest) returns (RoleInfo) {
+    option (google.api.http) = {
+      post: "/role"
+      body: "*"
+    };
+  }
+  rpc Update(UpdateRoleRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/role/{id}"
+      body: "*"
+    };
+  }
+  rpc Delete(DeleteRoleRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/role/{id}"
+    };
+  }
 }
 
 message PageRoleRequest {
@@ -33,22 +56,19 @@ message RoleInfo {
   int64 id = 1;
   string code = 2;
   string name = 3;
-  int64 permission_space_id = 4;
-  int64 created_at = 5;
-  int64 updated_at = 6;
+  int64 created_at = 4;
+  int64 updated_at = 5;
 }
 
 message CreateRoleRequest {
   string code = 1;
   string name = 2;
-  int64 permission_space_id = 3;
 }
 
 message UpdateRoleRequest {
   int64 id = 1;
   string code = 2;
   string name = 3;
-  int64 permission_space_id = 4;
 }
 
 message DeleteRoleRequest {

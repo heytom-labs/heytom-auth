@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -24,16 +25,15 @@ const (
 
 // 策略相关消息
 type PolicyInfo struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Id                int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name              string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Code              string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`
-	PermissionSpaceId int64                  `protobuf:"varint,4,opt,name=permission_space_id,json=permissionSpaceId,proto3" json:"permission_space_id,omitempty"`
-	Description       string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	CreatedAt         int64                  `protobuf:"varint,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt         int64                  `protobuf:"varint,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Code          string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	CreatedAt     int64                  `protobuf:"varint,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     int64                  `protobuf:"varint,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *PolicyInfo) Reset() {
@@ -85,13 +85,6 @@ func (x *PolicyInfo) GetCode() string {
 		return x.Code
 	}
 	return ""
-}
-
-func (x *PolicyInfo) GetPermissionSpaceId() int64 {
-	if x != nil {
-		return x.PermissionSpaceId
-	}
-	return 0
 }
 
 func (x *PolicyInfo) GetDescription() string {
@@ -160,13 +153,12 @@ func (x *DeletePolicyRequest) GetId() int64 {
 }
 
 type CreatePolicyRequest struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Name              string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Code              string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	PermissionSpaceId int64                  `protobuf:"varint,3,opt,name=permission_space_id,json=permissionSpaceId,proto3" json:"permission_space_id,omitempty"`
-	Description       string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Code          string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreatePolicyRequest) Reset() {
@@ -213,13 +205,6 @@ func (x *CreatePolicyRequest) GetCode() string {
 	return ""
 }
 
-func (x *CreatePolicyRequest) GetPermissionSpaceId() int64 {
-	if x != nil {
-		return x.PermissionSpaceId
-	}
-	return 0
-}
-
 func (x *CreatePolicyRequest) GetDescription() string {
 	if x != nil {
 		return x.Description
@@ -228,14 +213,13 @@ func (x *CreatePolicyRequest) GetDescription() string {
 }
 
 type UpdatePolicyRequest struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	Id                int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name              string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Code              string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`
-	PermissionSpaceId int64                  `protobuf:"varint,4,opt,name=permission_space_id,json=permissionSpaceId,proto3" json:"permission_space_id,omitempty"`
-	Description       string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Code          string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdatePolicyRequest) Reset() {
@@ -287,13 +271,6 @@ func (x *UpdatePolicyRequest) GetCode() string {
 		return x.Code
 	}
 	return ""
-}
-
-func (x *UpdatePolicyRequest) GetPermissionSpaceId() int64 {
-	if x != nil {
-		return x.PermissionSpaceId
-	}
-	return 0
 }
 
 func (x *UpdatePolicyRequest) GetDescription() string {
@@ -447,30 +424,27 @@ var File_auth_v1_policy_proto protoreflect.FileDescriptor
 
 const file_auth_v1_policy_proto_rawDesc = "" +
 	"\n" +
-	"\x14auth/v1/policy.proto\x12\aauth.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x13auth/v1/basic.proto\"\xd4\x01\n" +
+	"\x14auth/v1/policy.proto\x12\aauth.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x13auth/v1/basic.proto\"\xa4\x01\n" +
 	"\n" +
 	"PolicyInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x03 \x01(\tR\x04code\x12.\n" +
-	"\x13permission_space_id\x18\x04 \x01(\x03R\x11permissionSpaceId\x12 \n" +
+	"\x04code\x18\x03 \x01(\tR\x04code\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1d\n" +
 	"\n" +
 	"created_at\x18\x06 \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
 	"updated_at\x18\a \x01(\x03R\tupdatedAt\"%\n" +
 	"\x13DeletePolicyRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id\"\x8f\x01\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id\"_\n" +
 	"\x13CreatePolicyRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\tR\x04code\x12.\n" +
-	"\x13permission_space_id\x18\x03 \x01(\x03R\x11permissionSpaceId\x12 \n" +
-	"\vdescription\x18\x04 \x01(\tR\vdescription\"\x9f\x01\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12 \n" +
+	"\vdescription\x18\x04 \x01(\tR\vdescription\"o\n" +
 	"\x13UpdatePolicyRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
-	"\x04code\x18\x03 \x01(\tR\x04code\x12.\n" +
-	"\x13permission_space_id\x18\x04 \x01(\x03R\x11permissionSpaceId\x12 \n" +
+	"\x04code\x18\x03 \x01(\tR\x04code\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\"\"\n" +
 	"\x10GetPolicyRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"=\n" +
@@ -478,13 +452,13 @@ const file_auth_v1_policy_proto_rawDesc = "" +
 	"\x04page\x18\x01 \x01(\v2\x14.auth.v1.PageRequestR\x04page\"[\n" +
 	"\x12PagePolicyResponse\x12\x14\n" +
 	"\x05total\x18\x01 \x01(\x03R\x05total\x12/\n" +
-	"\bpolicies\x18\x02 \x03(\v2\x13.auth.v1.PolicyInfoR\bpolicies2\xc1\x02\n" +
-	"\x06Policy\x12C\n" +
-	"\bPageList\x12\x1a.auth.v1.PagePolicyRequest\x1a\x1b.auth.v1.PagePolicyResponse\x125\n" +
-	"\x03Get\x12\x19.auth.v1.GetPolicyRequest\x1a\x13.auth.v1.PolicyInfo\x12;\n" +
-	"\x06Create\x12\x1c.auth.v1.CreatePolicyRequest\x1a\x13.auth.v1.PolicyInfo\x12>\n" +
-	"\x06Update\x12\x1c.auth.v1.UpdatePolicyRequest\x1a\x16.google.protobuf.Empty\x12>\n" +
-	"\x06Delete\x12\x1c.auth.v1.DeletePolicyRequest\x1a\x16.google.protobuf.EmptyBC\n" +
+	"\bpolicies\x18\x02 \x03(\v2\x13.auth.v1.PolicyInfoR\bpolicies2\xb0\x03\n" +
+	"\x06Policy\x12Y\n" +
+	"\bPageList\x12\x1a.auth.v1.PagePolicyRequest\x1a\x1b.auth.v1.PagePolicyResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/policy/list\x12K\n" +
+	"\x03Get\x12\x19.auth.v1.GetPolicyRequest\x1a\x13.auth.v1.PolicyInfo\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/policy/{id}\x12O\n" +
+	"\x06Create\x12\x1c.auth.v1.CreatePolicyRequest\x1a\x13.auth.v1.PolicyInfo\"\x12\x82\xd3\xe4\x93\x02\f:\x01*\"\a/policy\x12W\n" +
+	"\x06Update\x12\x1c.auth.v1.UpdatePolicyRequest\x1a\x16.google.protobuf.Empty\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\x1a\f/policy/{id}\x12T\n" +
+	"\x06Delete\x12\x1c.auth.v1.DeletePolicyRequest\x1a\x16.google.protobuf.Empty\"\x14\x82\xd3\xe4\x93\x02\x0e*\f/policy/{id}BC\n" +
 	"\x16dev.kratos.api.auth.v1B\vAuthProtoV1P\x01Z\x1aheytom-auth/api/auth/v1;v1b\x06proto3"
 
 var (

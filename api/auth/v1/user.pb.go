@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
@@ -126,9 +127,8 @@ type UserInfo struct {
 	Mobile         string                 `protobuf:"bytes,3,opt,name=mobile,proto3" json:"mobile,omitempty"`
 	RoleIds        []int64                `protobuf:"varint,4,rep,packed,name=role_ids,json=roleIds,proto3" json:"role_ids,omitempty"`
 	OrganizationId int64                  `protobuf:"varint,5,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	PostId         int64                  `protobuf:"varint,6,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
-	CreatedAt      int64                  `protobuf:"varint,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt      int64                  `protobuf:"varint,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedAt      int64                  `protobuf:"varint,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt      int64                  `protobuf:"varint,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -198,13 +198,6 @@ func (x *UserInfo) GetOrganizationId() int64 {
 	return 0
 }
 
-func (x *UserInfo) GetPostId() int64 {
-	if x != nil {
-		return x.PostId
-	}
-	return 0
-}
-
 func (x *UserInfo) GetCreatedAt() int64 {
 	if x != nil {
 		return x.CreatedAt
@@ -225,7 +218,6 @@ type CreateUserRequest struct {
 	Mobile         string                 `protobuf:"bytes,2,opt,name=mobile,proto3" json:"mobile,omitempty"`
 	RoleIds        []int64                `protobuf:"varint,3,rep,packed,name=role_ids,json=roleIds,proto3" json:"role_ids,omitempty"`
 	OrganizationId int64                  `protobuf:"varint,4,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	PostId         int64                  `protobuf:"varint,5,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -288,13 +280,6 @@ func (x *CreateUserRequest) GetOrganizationId() int64 {
 	return 0
 }
 
-func (x *CreateUserRequest) GetPostId() int64 {
-	if x != nil {
-		return x.PostId
-	}
-	return 0
-}
-
 type UpdateUserRequest struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Id             int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -302,7 +287,6 @@ type UpdateUserRequest struct {
 	Mobile         string                 `protobuf:"bytes,3,opt,name=mobile,proto3" json:"mobile,omitempty"`
 	RoleIds        []int64                `protobuf:"varint,4,rep,packed,name=role_ids,json=roleIds,proto3" json:"role_ids,omitempty"`
 	OrganizationId int64                  `protobuf:"varint,5,opt,name=organization_id,json=organizationId,proto3" json:"organization_id,omitempty"`
-	PostId         int64                  `protobuf:"varint,6,opt,name=post_id,json=postId,proto3" json:"post_id,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -368,13 +352,6 @@ func (x *UpdateUserRequest) GetRoleIds() []int64 {
 func (x *UpdateUserRequest) GetOrganizationId() int64 {
 	if x != nil {
 		return x.OrganizationId
-	}
-	return 0
-}
-
-func (x *UpdateUserRequest) GetPostId() int64 {
-	if x != nil {
-		return x.PostId
 	}
 	return 0
 }
@@ -471,46 +448,48 @@ var File_auth_v1_user_proto protoreflect.FileDescriptor
 
 const file_auth_v1_user_proto_rawDesc = "" +
 	"\n" +
-	"\x12auth/v1/user.proto\x12\aauth.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x13auth/v1/basic.proto\";\n" +
+	"\x12auth/v1/user.proto\x12\aauth.v1\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x13auth/v1/basic.proto\";\n" +
 	"\x0fPageUserRequest\x12(\n" +
 	"\x04page\x18\x01 \x01(\v2\x14.auth.v1.PageRequestR\x04page\"Q\n" +
 	"\x10PageUserResponse\x12\x14\n" +
 	"\x05total\x18\x01 \x01(\x03R\x05total\x12'\n" +
-	"\x05users\x18\x02 \x03(\v2\x11.auth.v1.UserInfoR\x05users\"\xe1\x01\n" +
+	"\x05users\x18\x02 \x03(\v2\x11.auth.v1.UserInfoR\x05users\"\xc8\x01\n" +
 	"\bUserInfo\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
 	"\x06mobile\x18\x03 \x01(\tR\x06mobile\x12\x19\n" +
 	"\brole_ids\x18\x04 \x03(\x03R\aroleIds\x12'\n" +
-	"\x0forganization_id\x18\x05 \x01(\x03R\x0eorganizationId\x12\x17\n" +
-	"\apost_id\x18\x06 \x01(\x03R\x06postId\x12\x1d\n" +
+	"\x0forganization_id\x18\x05 \x01(\x03R\x0eorganizationId\x12\x1d\n" +
 	"\n" +
-	"created_at\x18\a \x01(\x03R\tcreatedAt\x12\x1d\n" +
+	"created_at\x18\x06 \x01(\x03R\tcreatedAt\x12\x1d\n" +
 	"\n" +
-	"updated_at\x18\b \x01(\x03R\tupdatedAt\"\x9c\x01\n" +
+	"updated_at\x18\a \x01(\x03R\tupdatedAt\"\x83\x01\n" +
 	"\x11CreateUserRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n" +
 	"\x06mobile\x18\x02 \x01(\tR\x06mobile\x12\x19\n" +
 	"\brole_ids\x18\x03 \x03(\x03R\aroleIds\x12'\n" +
-	"\x0forganization_id\x18\x04 \x01(\x03R\x0eorganizationId\x12\x17\n" +
-	"\apost_id\x18\x05 \x01(\x03R\x06postId\"\xac\x01\n" +
+	"\x0forganization_id\x18\x04 \x01(\x03R\x0eorganizationId\"\x93\x01\n" +
 	"\x11UpdateUserRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x16\n" +
 	"\x06mobile\x18\x03 \x01(\tR\x06mobile\x12\x19\n" +
 	"\brole_ids\x18\x04 \x03(\x03R\aroleIds\x12'\n" +
-	"\x0forganization_id\x18\x05 \x01(\x03R\x0eorganizationId\x12\x17\n" +
-	"\apost_id\x18\x06 \x01(\x03R\x06postId\" \n" +
+	"\x0forganization_id\x18\x05 \x01(\x03R\x0eorganizationId\" \n" +
 	"\x0eGetUserRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x03R\x02id\"#\n" +
 	"\x11DeleteUserRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\x03R\x02id2\xaf\x02\n" +
-	"\x04User\x12?\n" +
-	"\bPageList\x12\x18.auth.v1.PageUserRequest\x1a\x19.auth.v1.PageUserResponse\x121\n" +
-	"\x03Get\x12\x17.auth.v1.GetUserRequest\x1a\x11.auth.v1.UserInfo\x127\n" +
-	"\x06Create\x12\x1a.auth.v1.CreateUserRequest\x1a\x11.auth.v1.UserInfo\x12<\n" +
-	"\x06Update\x12\x1a.auth.v1.UpdateUserRequest\x1a\x16.google.protobuf.Empty\x12<\n" +
-	"\x06Delete\x12\x1a.auth.v1.DeleteUserRequest\x1a\x16.google.protobuf.EmptyBC\n" +
+	"\x02id\x18\x01 \x01(\x03R\x02id2\x94\x03\n" +
+	"\x04User\x12S\n" +
+	"\bPageList\x12\x18.auth.v1.PageUserRequest\x1a\x19.auth.v1.PageUserResponse\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
+	"/user/list\x12E\n" +
+	"\x03Get\x12\x17.auth.v1.GetUserRequest\x1a\x11.auth.v1.UserInfo\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
+	"/user/{id}\x12I\n" +
+	"\x06Create\x12\x1a.auth.v1.CreateUserRequest\x1a\x11.auth.v1.UserInfo\"\x10\x82\xd3\xe4\x93\x02\n" +
+	":\x01*\"\x05/user\x12S\n" +
+	"\x06Update\x12\x1a.auth.v1.UpdateUserRequest\x1a\x16.google.protobuf.Empty\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\x1a\n" +
+	"/user/{id}\x12P\n" +
+	"\x06Delete\x12\x1a.auth.v1.DeleteUserRequest\x1a\x16.google.protobuf.Empty\"\x12\x82\xd3\xe4\x93\x02\f*\n" +
+	"/user/{id}BC\n" +
 	"\x16dev.kratos.api.auth.v1B\vAuthProtoV1P\x01Z\x1aheytom-auth/api/auth/v1;v1b\x06proto3"
 
 var (

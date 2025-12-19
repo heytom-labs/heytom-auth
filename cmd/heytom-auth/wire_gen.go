@@ -7,13 +7,13 @@
 package main
 
 import (
+	"github.com/go-kratos/kratos/v2"
+	"github.com/go-kratos/kratos/v2/log"
 	"heytom-auth/internal/biz"
 	"heytom-auth/internal/conf"
 	"heytom-auth/internal/data"
 	"heytom-auth/internal/server"
 	"heytom-auth/internal/service"
-	"github.com/go-kratos/kratos/v2"
-	"github.com/go-kratos/kratos/v2/log"
 )
 
 import (
@@ -31,8 +31,26 @@ func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*
 	greeterRepo := data.NewGreeterRepo(dataData, logger)
 	greeterUsecase := biz.NewGreeterUsecase(greeterRepo)
 	greeterService := service.NewGreeterService(greeterUsecase)
-	grpcServer := server.NewGRPCServer(confServer, greeterService, logger)
-	httpServer := server.NewHTTPServer(confServer, greeterService, logger)
+	userRepo := data.NewUserRepo(dataData)
+	userUsecase := biz.NewUserUsecase(userRepo)
+	userService := service.NewUserService(userUsecase)
+	roleRepo := data.NewRoleRepo(dataData)
+	roleUsecase := biz.NewRoleUsecase(roleRepo)
+	roleService := service.NewRoleService(roleUsecase)
+	policyRepo := data.NewPolicyRepo(dataData)
+	policyUsecase := biz.NewPolicyUsecase(policyRepo)
+	policyService := service.NewPolicyService(policyUsecase)
+	applicationRepo := data.NewApplicationRepo(dataData)
+	applicationUsecase := biz.NewApplicationUsecase(applicationRepo)
+	applicationService := service.NewApplicationService(applicationUsecase)
+	organizationRepo := data.NewOrganizationRepo(dataData)
+	organizationUsecase := biz.NewOrganizationUsecase(organizationRepo)
+	organizationService := service.NewOrganizationService(organizationUsecase)
+	grpcServer := server.NewGRPCServer(confServer, greeterService, userService, roleService, policyService, applicationService, organizationService, logger)
+	authRepo := data.NewAuthRepo(dataData)
+	authUsecase := biz.NewAuthUsecase(authRepo)
+	authService := service.NewAuthService(authUsecase)
+	httpServer := server.NewHTTPServer(confServer, greeterService, userService, roleService, policyService, applicationService, organizationService, authService, logger)
 	app := newApp(logger, grpcServer, httpServer)
 	return app, func() {
 		cleanup()

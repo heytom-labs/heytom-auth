@@ -1,6 +1,7 @@
 package server
 
 import (
+	authv1 "heytom-auth/api/auth/v1"
 	v1 "heytom-auth/api/helloworld/v1"
 	"heytom-auth/internal/conf"
 	"heytom-auth/internal/service"
@@ -11,7 +12,7 @@ import (
 )
 
 // NewHTTPServer new an HTTP server.
-func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, logger log.Logger) *http.Server {
+func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, user *service.UserService, role *service.RoleService, policy *service.PolicyService, application *service.ApplicationService, organization *service.OrganizationService, auth *service.AuthService, logger log.Logger) *http.Server {
 	var opts = []http.ServerOption{
 		http.Middleware(
 			recovery.Recovery(),
@@ -28,5 +29,11 @@ func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, logger log.L
 	}
 	srv := http.NewServer(opts...)
 	v1.RegisterGreeterHTTPServer(srv, greeter)
+	authv1.RegisterUserHTTPServer(srv, user)
+	authv1.RegisterRoleHTTPServer(srv, role)
+	authv1.RegisterPolicyHTTPServer(srv, policy)
+	authv1.RegisterApplicationHTTPServer(srv, application)
+	authv1.RegisterOrganizationHTTPServer(srv, organization)
+	authv1.RegisterAuthHTTPServer(srv, auth)
 	return srv
 }

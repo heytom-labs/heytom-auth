@@ -3,10 +3,169 @@
 
 openapi: 3.0.3
 info:
-    title: Greeter API
-    description: The greeting service definition.
+    title: ""
     version: 0.0.1
 paths:
+    /application:
+        post:
+            tags:
+                - Application
+            operationId: Application_Create
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/auth.v1.CreateApplicationRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.ApplicationInfo'
+    /application/list:
+        get:
+            tags:
+                - Application
+            operationId: Application_PageList
+            parameters:
+                - name: page.pageIndex
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: page.pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.PageApplicationResponse'
+    /application/{id}:
+        get:
+            tags:
+                - Application
+            operationId: Application_Get
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.ApplicationInfo'
+        put:
+            tags:
+                - Application
+            operationId: Application_Update
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/auth.v1.UpdateApplicationRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+        delete:
+            tags:
+                - Application
+            operationId: Application_Delete
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+    /auth/github:
+        post:
+            tags:
+                - Auth
+            operationId: Auth_LoginByGithub
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/auth.v1.LoginByGithubRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.TokenResponse'
+    /auth/login:
+        post:
+            tags:
+                - Auth
+            operationId: Auth_Login
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/auth.v1.LoginRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.TokenResponse'
+    /auth/logout:
+        post:
+            tags:
+                - Auth
+            operationId: Auth_Logout
+            requestBody:
+                content:
+                    application/json: {}
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+    /auth/register:
+        post:
+            tags:
+                - Auth
+            operationId: Auth_Register
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/auth.v1.RegisterRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.TokenResponse'
     /helloworld/{name}:
         get:
             tags:
@@ -26,8 +185,651 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/helloworld.v1.HelloReply'
+    /organization:
+        post:
+            tags:
+                - Organization
+            operationId: Organization_Create
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/auth.v1.CreateOrganizationRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.OrganizationInfo'
+    /organization/list:
+        get:
+            tags:
+                - Organization
+            operationId: Organization_PageList
+            parameters:
+                - name: page.pageIndex
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: page.pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.PageOrganizationResponse'
+    /organization/{id}:
+        get:
+            tags:
+                - Organization
+            operationId: Organization_Get
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.OrganizationInfo'
+        put:
+            tags:
+                - Organization
+            operationId: Organization_Update
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/auth.v1.UpdateOrganizationRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+        delete:
+            tags:
+                - Organization
+            operationId: Organization_Delete
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+    /policy:
+        post:
+            tags:
+                - Policy
+            operationId: Policy_Create
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/auth.v1.CreatePolicyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.PolicyInfo'
+    /policy/list:
+        get:
+            tags:
+                - Policy
+            operationId: Policy_PageList
+            parameters:
+                - name: page.pageIndex
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: page.pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.PagePolicyResponse'
+    /policy/{id}:
+        get:
+            tags:
+                - Policy
+            operationId: Policy_Get
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.PolicyInfo'
+        put:
+            tags:
+                - Policy
+            operationId: Policy_Update
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/auth.v1.UpdatePolicyRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+        delete:
+            tags:
+                - Policy
+            operationId: Policy_Delete
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+    /role:
+        post:
+            tags:
+                - Role
+            operationId: Role_Create
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/auth.v1.CreateRoleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.RoleInfo'
+    /role/list:
+        get:
+            tags:
+                - Role
+            operationId: Role_PageList
+            parameters:
+                - name: page.pageIndex
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: page.pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.PageRoleResponse'
+    /role/{id}:
+        get:
+            tags:
+                - Role
+            operationId: Role_Get
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.RoleInfo'
+        put:
+            tags:
+                - Role
+            operationId: Role_Update
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/auth.v1.UpdateRoleRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+        delete:
+            tags:
+                - Role
+            operationId: Role_Delete
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+    /user:
+        post:
+            tags:
+                - User
+            operationId: User_Create
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/auth.v1.CreateUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.UserInfo'
+    /user/list:
+        get:
+            tags:
+                - User
+            operationId: User_PageList
+            parameters:
+                - name: page.pageIndex
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+                - name: page.pageSize
+                  in: query
+                  schema:
+                    type: integer
+                    format: int32
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.PageUserResponse'
+    /user/{id}:
+        get:
+            tags:
+                - User
+            operationId: User_Get
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/auth.v1.UserInfo'
+        put:
+            tags:
+                - User
+            operationId: User_Update
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/auth.v1.UpdateUserRequest'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content: {}
+        delete:
+            tags:
+                - User
+            operationId: User_Delete
+            parameters:
+                - name: id
+                  in: path
+                  required: true
+                  schema:
+                    type: string
+            responses:
+                "200":
+                    description: OK
+                    content: {}
 components:
     schemas:
+        auth.v1.ApplicationInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                appKey:
+                    type: string
+                appSecret:
+                    type: string
+                callbackUrl:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: 应用相关消息
+        auth.v1.CreateApplicationRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                description:
+                    type: string
+                callbackUrl:
+                    type: string
+        auth.v1.CreateOrganizationRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                code:
+                    type: string
+                parentId:
+                    type: string
+                description:
+                    type: string
+        auth.v1.CreatePolicyRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                code:
+                    type: string
+                description:
+                    type: string
+        auth.v1.CreateRoleRequest:
+            type: object
+            properties:
+                code:
+                    type: string
+                name:
+                    type: string
+        auth.v1.CreateUserRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                mobile:
+                    type: string
+                roleIds:
+                    type: array
+                    items:
+                        type: string
+                organizationId:
+                    type: string
+        auth.v1.LoginByGithubRequest:
+            type: object
+            properties:
+                code:
+                    type: string
+        auth.v1.LoginRequest:
+            type: object
+            properties:
+                mobile:
+                    type: string
+                password:
+                    type: string
+        auth.v1.OrganizationInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                code:
+                    type: string
+                parentId:
+                    type: string
+                description:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: 组织相关消息
+        auth.v1.PageApplicationResponse:
+            type: object
+            properties:
+                total:
+                    type: string
+                applications:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/auth.v1.ApplicationInfo'
+        auth.v1.PageOrganizationResponse:
+            type: object
+            properties:
+                total:
+                    type: string
+                organizations:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/auth.v1.OrganizationInfo'
+        auth.v1.PagePolicyResponse:
+            type: object
+            properties:
+                total:
+                    type: string
+                policies:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/auth.v1.PolicyInfo'
+        auth.v1.PageRoleResponse:
+            type: object
+            properties:
+                total:
+                    type: string
+                roles:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/auth.v1.RoleInfo'
+        auth.v1.PageUserResponse:
+            type: object
+            properties:
+                total:
+                    type: string
+                users:
+                    type: array
+                    items:
+                        $ref: '#/components/schemas/auth.v1.UserInfo'
+        auth.v1.PolicyInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                code:
+                    type: string
+                description:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: 策略相关消息
+        auth.v1.RegisterRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                mobile:
+                    type: string
+                password:
+                    type: string
+        auth.v1.RoleInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                code:
+                    type: string
+                name:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: 角色相关消息
+        auth.v1.TokenResponse:
+            type: object
+            properties:
+                accessToken:
+                    type: string
+                refreshToken:
+                    type: string
+                expiresIn:
+                    type: string
+        auth.v1.UpdateApplicationRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                description:
+                    type: string
+                callbackUrl:
+                    type: string
+        auth.v1.UpdateOrganizationRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                code:
+                    type: string
+                parentId:
+                    type: string
+                description:
+                    type: string
+        auth.v1.UpdatePolicyRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                code:
+                    type: string
+                description:
+                    type: string
+        auth.v1.UpdateRoleRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                code:
+                    type: string
+                name:
+                    type: string
+        auth.v1.UpdateUserRequest:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                mobile:
+                    type: string
+                roleIds:
+                    type: array
+                    items:
+                        type: string
+                organizationId:
+                    type: string
+        auth.v1.UserInfo:
+            type: object
+            properties:
+                id:
+                    type: string
+                name:
+                    type: string
+                mobile:
+                    type: string
+                roleIds:
+                    type: array
+                    items:
+                        type: string
+                organizationId:
+                    type: string
+                createdAt:
+                    type: string
+                updatedAt:
+                    type: string
+            description: 用户相关消息
         helloworld.v1.HelloReply:
             type: object
             properties:
@@ -35,4 +837,17 @@ components:
                     type: string
             description: The response message containing the greetings
 tags:
+    - name: Application
+      description: 应用服务
+    - name: Auth
+      description: 认证服务
     - name: Greeter
+      description: The greeting service definition.
+    - name: Organization
+      description: 组织服务
+    - name: Policy
+      description: 策略服务
+    - name: Role
+      description: 角色服务
+    - name: User
+      description: 用户服务

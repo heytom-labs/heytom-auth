@@ -4,6 +4,7 @@ syntax = "proto3";
 package auth.v1;
 
 import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
 import "auth/v1/basic.proto";
 
 option go_package = "heytom-auth/api/auth/v1;v1";
@@ -13,11 +14,33 @@ option java_outer_classname = "AuthProtoV1";
 
 // 应用服务
 service Application {
-  rpc PageList(PageApplicationRequest) returns (PageApplicationResponse);
-  rpc Get(GetApplicationRequest) returns (ApplicationInfo);
-  rpc Create(CreateApplicationRequest) returns (ApplicationInfo);
-  rpc Update(UpdateApplicationRequest) returns (google.protobuf.Empty);
-  rpc Delete(DeleteApplicationRequest) returns (google.protobuf.Empty);
+  rpc PageList(PageApplicationRequest) returns (PageApplicationResponse) {
+    option (google.api.http) = {
+      get: "/application/list"
+    };
+  }
+  rpc Get(GetApplicationRequest) returns (ApplicationInfo) {
+    option (google.api.http) = {
+      get: "/application/{id}"
+    };
+  }
+  rpc Create(CreateApplicationRequest) returns (ApplicationInfo) {
+    option (google.api.http) = {
+      post: "/application"
+      body: "*"
+    };
+  }
+  rpc Update(UpdateApplicationRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/application/{id}"
+      body: "*"
+    };
+  }
+  rpc Delete(DeleteApplicationRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/application/{id}"
+    };
+  }
 }
 
 // 应用相关消息

@@ -3,6 +3,7 @@ syntax = "proto3";
 package auth.v1;
 
 import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
 import "auth/v1/basic.proto";
 
 option go_package = "heytom-auth/api/auth/v1;v1";
@@ -12,11 +13,33 @@ option java_outer_classname = "AuthProtoV1";
 
 // 组织服务
 service Organization {
-  rpc PageList(PageOrganizationRequest) returns (PageOrganizationResponse);
-  rpc Get(GetOrganizationRequest) returns (OrganizationInfo);
-  rpc Create(CreateOrganizationRequest) returns (OrganizationInfo);
-  rpc Update(UpdateOrganizationRequest) returns (google.protobuf.Empty);
-  rpc Delete(DeleteOrganizationRequest) returns (google.protobuf.Empty);
+  rpc PageList(PageOrganizationRequest) returns (PageOrganizationResponse) {
+    option (google.api.http) = {
+      get: "/organization/list"
+    };
+  }
+  rpc Get(GetOrganizationRequest) returns (OrganizationInfo) {
+    option (google.api.http) = {
+      get: "/organization/{id}"
+    };
+  }
+  rpc Create(CreateOrganizationRequest) returns (OrganizationInfo) {
+    option (google.api.http) = {
+      post: "/organization"
+      body: "*"
+    };
+  }
+  rpc Update(UpdateOrganizationRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/organization/{id}"
+      body: "*"
+    };
+  }
+  rpc Delete(DeleteOrganizationRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/organization/{id}"
+    };
+  }
 }
 
 // 组织相关消息
